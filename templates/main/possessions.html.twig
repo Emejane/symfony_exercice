@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Possessions{% endblock %}
+
+      {#  { NOTE: si on souhaite passer par react, on met le code suivant par afficher avec notre composant
+
+      % block javascripts %}
+            {{ encore_entry_script_tags('detail') }}
+        {% endblock %}
+
+{% block body %}
+
+    <div class="container mt-4">
+        <div id="detail" data-id-user="{{ id }}"></div>
+    </div>
+
+{% endblock %}#}
+
+{% block body %}
+    <div class="container">
+        <a href="{{ path('home') }}" class="btn btn-primary mt-5 mb-5">Accueil</a>
+
+        <div class="container">
+            <h3>Utilisateur : </h3>
+            <div>
+                <p>Nom: {{ user.nom}}</p>
+                <p>Prénom: {{ user.prenom }}</p>
+                <p>E-mail: {{ user.email }}</p>
+                <p>Adresse: {{ user.adresse }}</p>
+                <p>Telephone: {{ user.tel }}</p>
+            </div>
+
+        </div>
+
+        <h3>Possessions : </h3>
+        <table class="table container">
+            <thead>
+            <tr class="table-primary">
+                <th scope="col">Nom</th>
+                <th scope="col">Valeur</th>
+                <th scope="col">Type</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% if  possessions %}
+                {% for possession in possessions %}
+                    <tr>
+                        <th>{{ possession.nom }}</th>
+                        <th>{{ possession.valeur }}</th>
+                        <th>{{ possession.type }}</th>
+
+                    </tr>
+                {% endfor %}
+
+            {% else %}
+                <th scope="col">Aucune possession enregistré</th>
+            {% endif %}
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
