@@ -1,5 +1,6 @@
 import React from 'react';
-import addUser from "./addUser";
+import AddUser from "./addUser";
+
 
 //composant pour affichage de liste
 class Users extends React.Component {
@@ -7,8 +8,11 @@ class Users extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            users: [],
+            show:false
         }
+
+
     }
 
     //lien avec la bdd
@@ -34,22 +38,24 @@ class Users extends React.Component {
                 //console.table(data);
                 this.setState({users: data})
             })
-    }
 
-    openWindow = ()=>{
-        if(closeWindow){
-            setCloseWindow(false);
-        }else{
-            setCloseWindow(true);
-        }
 
     }
+
+
+    handleShow = () =>{
+        this.setState({show:!this.state.show})
+
+    }
+
 
     render() {
+
         return <div className="container">
 
-            <button className='btn btn-primary mt-2 mb-2 mx-5'  onClick={openWindow}>Ajouter Utilisateur</button>
-            {!closeWindow && <AddUser onClick={openWindow}/>}
+            <button className='btn btn-primary mt-2 mb-2 mx-5 modal-trigger' onClick={this.handleShow}>Ajouter Utilisateur</button>
+            {this.state.show ? <AddUser show={this.handleShow}/> : null}
+            {/*{console.log(this.state.show)}*/}
 
             <table className="table">
                 <thead>
